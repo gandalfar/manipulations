@@ -21,6 +21,8 @@ module.exports = function(defaults) {
   // along with the exports of each module as its value.
 
   app.import('bower_components/SoundManager2/script/soundmanager2-jsmin.js');
+  app.import('vendor/msr/MediaStreamRecorder.min.js');
+  app.import('vendor/ConcatenateBlobs.js');
 
   return app.toTree();
 };

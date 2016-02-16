@@ -1,0 +1,9 @@
+<br /><br /><br /><br /><br />
+
+<button {{action 'startRecording'}}>Start</button>
+<button {{action 'stopRecording'}}>Stop</button>
+
+{{#if blobURL}}
+  <a href="{{{blobURL}}}">{{{blobURL}}}</a>
+{{/if}}
+<br /><br /><br /><br /><br />
