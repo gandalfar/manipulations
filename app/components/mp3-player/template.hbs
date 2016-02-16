@@ -1,0 +1,25 @@
+<div class="small-1 columns">
+  <button class="btn" {{action 'playPause'}}>
+    {{#if playing}}
+      {{fa-icon "stop"}}
+    {{else}}
+      {{fa-icon "play"}}
+    {{/if}}
+  </button>
+</div>
+
+<div class="small-8 columns end">
+  <p>{{ text }}, {{ state }}</p>
+</div>
+
+{{#if playIndex}}
+moo
+{{/if}}
+
+{{#if selectClip}}
+  <div class="small-3 columns">
+    <button {{action "selectClip"}} class="button">Dodaj</button>
+  </div>
+{{/if}}
+
+{{yield}}
