@@ -4,6 +4,6 @@
 <button {{action 'stopRecording'}}>Stop</button>
 
 {{#if blobURL}}
-  <a href="{{{blobURL}}}">{{{blobURL}}}</a>
+  {{mp3-player mp3file=blobURL}}
 {{/if}}
 <br /><br /><br /><br /><br />
