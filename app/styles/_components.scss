@@ -1,6 +1,19 @@
 .question {
+  position: relative;
+
   margin-bottom: rem-calc(15);
   border: 5px solid darken(rebeccapurple, 10%);;
+}
+
+.question .fa-bars {
+  position: absolute;
+
+  bottom: rem-calc(5);
+  right: rem-calc(5);
+
+  &:hover {
+    cursor: move;
+  }
 }
 
 .clip-listing--wrapper {

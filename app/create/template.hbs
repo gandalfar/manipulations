@@ -1,8 +1,4 @@
-<div class="row">
-  <div class="medium-6 columns">
-    {{audio-recorder}}
-  </div>
-</div>
+{{audio-recorder}}
 
 <div class="row">
   <div class="medium-6 columns">
@@ -14,33 +10,39 @@
       }}
     {{/each}}
   </div>
-</div>
 
-<div class="row">
   <div class="medium-6 columns">
     {{#sortable-objects sortableObjectList=sortableObjectList sortEndAction='sortEndAction'}}
       {{#each sortableObjectList as |item index|}}
         {{#draggable-object content=item  overrideClass='sortObject' isSortable=true}}
           <div class="question">
             {{input placeholder="Zastavite vprašanje"}}
+
+            {{audio-recorder
+              shouldAutoPlay=(eq playIndex (concat index '.a'))
+              autoPlayFinished=(action 'autoPlayFinished' 'a')
+              }}
+
             {{mp3-player
               mp3file=item.mp3
               text=item.text
-              state=item.state
-              shouldAutoPlay=(eq playIndex index)
-              autoPlayFinished=(action 'autoPlayFinished')
+              shouldAutoPlay=(eq playIndex (concat index '.b'))
+              autoPlayFinished=(action 'autoPlayFinished' 'b')
             }}
-            {{item.state}}
+
+            {{fa-icon "bars"}}
           </div>
         {{/draggable-object}}
       {{/each}}
     {{/sortable-objects}}
   </div>
 
-  <div class="small-6 columns">
-    <button {{action 'playSortedClips'}} class="button">Predvajaj vse</button>
-    {{ playAll }}
-  </div>
+  {{#if sortableObjectList}}
+    <div class="small-6 columns">
+      <button {{action 'playSortedClips'}} class="button">Predvajaj vse</button>
+      {{ playAll }}
+    </div>
+  {{/if}}
 </div>
 
 {{outlet}}

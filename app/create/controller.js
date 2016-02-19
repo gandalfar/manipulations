@@ -57,24 +57,28 @@ export default Ember.Controller.extend({
 
   sortableObjectList: Ember.A([]),
   playIndex: -1,
+  playCounter: -1,
 
   actions: {
-    dragStart: function(object) {
-    },
-    sortEndAction: function() {
-    },
-
     selectClip: function(clip) {
       this.sortableObjectList.pushObject(Ember.copy(clip));
     },
 
     playSortedClips: function() {
-      this.incrementProperty('playIndex');
+      let playCounter = this.incrementProperty('playCounter');
+      this.set('playIndex', `${playCounter}.a`);
     },
 
-    autoPlayFinished: function() {
-      console.log('recieved');
-      this.incrementProperty('playIndex');
+    autoPlayFinished: function(param) {
+      let letter = 'b',
+          playCounter = this.get('playCounter');
+
+      if ( param === 'b' ) {
+        playCounter = this.incrementProperty('playCounter');
+        letter = 'a';
+      }
+
+      this.set('playIndex', `${playCounter}.${letter}`);
     }
   }
 

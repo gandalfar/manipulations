@@ -5,7 +5,7 @@ export default Ember.Component.extend({
   playing: false,
   classNames: ['clip-listing--wrapper', 'clearfix'],
 
-  didInsertElement() {
+  didReceiveAttrs() {
     this._super(...arguments);
 
     var self = this;
@@ -18,7 +18,6 @@ export default Ember.Component.extend({
     this._super(...arguments);
 
     let shouldAutoPlay = this.get('shouldAutoPlay');
-    console.log(shouldAutoPlay);
     if ( shouldAutoPlay ) {
       this.play();
     }
@@ -45,16 +44,16 @@ export default Ember.Component.extend({
     this.set('playing', false);
   },
 
-  finish: function() {
+  finish: function(param) {
     var self = this;
 
     this.set('playing', false);
     this.set('started', false);
 
     if ( this.get('shouldAutoPlay') ) {
-      Ember.run(this, function(){
-        self.sendAction('autoPlayFinished');
-      }, 1500);
+      Ember.run.later(this, function(){
+        self.sendAction('autoPlayFinished', param);
+      }, 1);
     }
   },
 

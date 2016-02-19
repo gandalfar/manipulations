@@ -3,10 +3,13 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   mediaConstraints: {audio: true},
   audioBlobs: Ember.A([]),
+  recording: false,
+  mediaRecorder: null,
 
   didInsertElement() {
+    this._super(...arguments);
+
     var self = this;
-    self._super(...arguments);
 
     navigator.getUserMedia(
       this.get('mediaConstraints'),
@@ -34,12 +37,12 @@ export default Ember.Component.extend({
 
   onDataAvailable(blob) {
     this.get('audioBlobs').pushObject(blob);
-    console.log(this.get('audioBlobs'));
   },
 
   actions: {
     startRecording() {
       this.get('mediaRecorder').start(2000);
+      this.set('recording', true);
     },
 
     stopRecording() {
@@ -47,9 +50,11 @@ export default Ember.Component.extend({
           mediaRecorder = this.get('mediaRecorder');
 
       mediaRecorder.stop();
+      this.set('recording', false);
 
       new ConcatenateBlobs(this.get('audioBlobs'), 'audio/wav', function(resultingBlob) {
         self.set('blobURL', URL.createObjectURL(resultingBlob));
+        self.get('audioBlobs').clear();
       });
     }
   }

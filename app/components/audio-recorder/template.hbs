@@ -1,9 +1,22 @@
-<br /><br /><br /><br /><br />
+<div class="small-1 columns">
+  {{#unless recording }}
+    <button {{action 'startRecording'}}>{{fa-icon "circle"}}</button>
+  {{else}}
+    <button {{action 'stopRecording'}}>{{fa-icon "stop"}}</button>
+  {{/unless}}
+</div>
 
-<button {{action 'startRecording'}}>Start</button>
-<button {{action 'stopRecording'}}>Stop</button>
+<div class="small-11 columns end">
+  <span>Posnamite vprašanje</span>
+</div>
 
 {{#if blobURL}}
-  {{mp3-player mp3file=blobURL}}
+  {{mp3-player
+    mp3file=blobURL
+    text="Posneto vprašanje"
+    shouldAutoPlay=shouldAutoPlay
+    autoPlayFinished=autoPlayFinished
+  }}
+{{else}}
+
 {{/if}}
-<br /><br /><br /><br /><br />
